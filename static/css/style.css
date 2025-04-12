@@ -11706,3 +11706,82 @@ aside,
   background-color: #007bff !important;
   border-color: #007bff !important;
 }
+body {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  padding: 0;
+  margin: 0;
+  position: relative;
+  }
+  #map {
+  height: 100vh;
+  width: 100vw;
+  }
+  /* Container chính */
+  .leaflet-routing-container {
+    background: #ffffffee;
+    backdrop-filter: blur(5px);
+    border-radius: 14px;
+    padding: 10px;
+    max-height: 100vh;  /* hoặc 100vh nếu muốn cực đại */
+    overflow-y: auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    font-family: "Segoe UI", sans-serif;
+    font-size: 14px;
+    color: #333;
+    z-index: 10000;
+  }
+  
+  /* Mỗi tuyến thay thế */
+  .leaflet-routing-alt {
+    border: 2px solid #ddd;
+    border-radius: 12px;
+    padding: 10px;
+    margin-bottom: 12px;
+    background-color: #f9f9f9;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .leaflet-routing-alt:hover {
+    border-color: #007bff;
+    background-color: #eef6ff;
+    box-shadow: 0 0 6px rgba(0, 123, 255, 0.4);
+  }
+  
+  /* Tiêu đề tuyến */
+  .leaflet-routing-alt h2 {
+    font-size: 15px;
+    margin-bottom: 6px;
+    color: #007bff;
+  }
+  
+  /* Danh sách chỉ dẫn */
+  .leaflet-routing-instructions-container ol {
+    padding-left: 20px;
+  }
+  
+  .leaflet-routing-instruction {
+    padding: 6px 0;
+    border-bottom: 1px dashed #ccc;
+  }
+  
+  .leaflet-routing-instruction:last-child {
+    border-bottom: none;
+  }
+  
+  .leaflet-routing-instruction span {
+    font-size: 12px;
+    color: #777;
+  }
+  
+  /* Thanh cuộn gọn đẹp */
+  .leaflet-routing-container::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .leaflet-routing-container::-webkit-scrollbar-thumb {
+    background-color: #bbb;
+    border-radius: 6px;
+  }  
+
+  

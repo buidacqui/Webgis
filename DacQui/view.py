@@ -12,3 +12,5 @@ def aboutpage(request):
     return render(request, 'about.html')
 def map_view(request):
     return render(request, 'index.html')
+def routing(request):
+    return render(request, 'routing.html')

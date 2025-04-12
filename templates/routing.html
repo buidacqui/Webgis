@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+
+{% load static %}
+
+{% block title %}
+    Bản đồ cơ bản
+{% endblock %}
+
+{% block map %}
+    <link rel="stylesheet" href="{% static 'leaflet/leaflet.css' %}">
+    <link rel="stylesheet" href="{% static 'css/map/map.css' %}">
+    <script src="{% static 'leaflet/leaflet.js' %}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-contextmenu/1.4.0/leaflet.contextmenu.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+{% endblock %}
+
+{% block content %}
+    <section class="special-services">
+        <div class="container-fluid">
+            <div class="section-title text-center" data-aos="fade-up">
+                <h2>Bản đồ cơ bản</h2>
+            </div>
+            <div class="row" style="height: 800px; position: relative;">
+                <button id="fullscreen-button" class="btn btn-primary" style="position: absolute; top: 10px; right: 10px; z-index: 1000;">
+                    Fullscreen
+                </button>
+                <div id="map">
+                    <div style="position: absolute; top: 20px; left: 50%; transform: translateX(-50%); z-index: 1000; width: 300px;">
+                        
+                        <input
+                          type="text"
+                          id="destinationInput"
+                          class="form-control"
+                          placeholder="Nhập tên tỉnh miền Nam..."
+                          oninput="showSuggestions()"
+                          onfocus="showSuggestions()"
+                          onkeydown="handleSearch(event)"
+                        >
+                        <div id="suggestions" class="list-group" style="position: absolute; width: 100%; max-height: 200px; overflow-y: auto;"></div>
+                      </div>
+                      
+                      <div id="map" style="height: 600px;"></div>
+                      
+                      
+                      <div id="map" style="height: 600px;"></div>
+                      
+                </div>
+            </div>
+            <div class="services_mask">
+                <img src="{% static 'img/mask/mask09.svg' %}" alt="Icon" class="img-fluid mask_01" />
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'js/leaflet/leaflet.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-contextmenu/1.4.0/leaflet.contextmenu.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <script src="{% static 'js/Webgis/routing.js' %}"></script>
+{% endblock %}
