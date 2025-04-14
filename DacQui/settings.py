@@ -77,12 +77,8 @@ WSGI_APPLICATION = 'DacQui.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'Webgis',
-        'USER': 'postgres',  # superuser PostgreSQL
-        'PASSWORD': '123',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        
+        'CONN_MAX_AGE': 0,  # mỗi request xong sẽ đóng connection
     }
 }
 

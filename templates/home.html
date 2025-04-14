@@ -1,10 +1,188 @@
-{% extends "layout.html" %}
-
 {% block title %}
-    Trang chủ
+{% load static %}
+
 {% endblock %}
 
 {% block content %}
-    <h1>Trang chủ</h1>
-    <p>Để xem thêm chi tiết <a href="/gioi-thieu">tại đây</a></p>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GIS</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Arial, sans-serif; }
+    header {
+      background: #0a688d;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+    }
+    header h1 { font-size: 18px; text-transform: uppercase; }
+    header .right { display: flex; align-items: center; gap: 10px; }
+    nav {
+      background: white;
+      border-bottom: 1px solid #ccc;
+      padding: 10px 20px;
+      display: flex;
+      gap: 20px;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #0a688d;
+      font-size: 14px;
+    }
+    .container {
+      display: flex;
+      height: calc(100vh - 88px);
+    }
+    .sidebar-left {
+      width: 50px;
+      background: #0a688d;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .sidebar-left div {
+      width: 100%;
+      text-align: center;
+      padding: 12px 0;
+      border-bottom: 1px solid white;
+      cursor: pointer;
+    }
+    .sidebar-filters {
+      width: 220px;
+      padding: 15px;
+      border-right: 1px solid #ccc;
+      background: #f9f9f9;
+    }
+    .sidebar-filters select {
+      width: 100%;
+      padding: 5px;
+      margin-bottom: 15px;
+    }
+    .main {
+      flex: 1;
+      position: relative;
+      background: #e0f0ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden; /* Ensures the image covers the screen without overflow */
+    }
+    .info-box {
+      position: absolute;
+      top: 30px;
+      left: 30px;
+      background: white;
+      padding: 15px;
+      border-radius: 5px;
+      width: 260px;
+      font-size: 14px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    .panel-right {
+      width: 260px;
+      padding: 15px;
+      border-left: 1px solid #ccc;
+      background: #fff;
+      font-size: 14px;
+    }
+    .panel-right h3 {
+      margin-bottom: 10px;
+      font-size: 16px;
+      color: #0a688d;
+    }
+    .chart {
+      margin-bottom: 20px;
+    }
+    input[type="text"] {
+      padding: 5px;
+    }
+    button {
+      background: white;
+      color: #0a688d;
+      border: none;
+      padding: 6px 10px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .flag { height: 20px; }
+    /* Full-screen image */
+    .full-screen-img {
+      width: 100%;
+      height: 100vh;
+      object-fit: cover; /* Ensures the image covers the entire screen */
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="left">
+        <h1 class="lang" 
+        data-vi="Nhóm 8 - Bản đồ thể hiện chi tiết các tỉnh thành miền Nam Việt Nam" 
+        data-en="Group 8 - Map showing detailed provinces of Southern Vietnam">
+      Nhóm 8 - Bản đồ thể hiện chi tiết các tỉnh thành miền Nam Việt Nam
+    </h1>
+        </div>
+    <div class="right">
+        <button class="lang" data-vi="Đăng nhập" data-en="Login">Đăng nhập</button>
+      <button class="lang" data-vi="Đăng ký" data-en="Register">Đăng ký</button>
+      <button onclick="changeLang('vi')" style="background: none; border: none; padding: 0; cursor: pointer;">
+        <img src="https://flagcdn.com/w40/vn.png" class="flag" alt="VN">
+      </button>
+      
+      <button onclick="changeLang('en')" style="background: none; border: none; padding: 0; cursor: pointer;">
+        <img src="https://flagcdn.com/w40/gb.png" class="flag" alt="EN">
+      </button>
+      
+      
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="/" class="lang" data-vi="Trang chủ" data-en="Home">Trang chủ</a>
+    <a href="/map" class="lang" data-vi="Bản đồ" data-en="Map">Bản đồ</a>
+    <a href="/routing" class="lang" data-vi="Hướng dẫn" data-en="Instruction">Định tuyến bản đồ</a>
+    
+
+    <a href="#" class="lang" data-vi="Khái niệm" data-en="Term">Khái niệm</a>
+    <a href="/gioi-thieu" class="lang" data-vi="Giới thiệu" data-en="About Us">Giới thiệu</a>
+    <a href="#" class="lang" data-vi="Hướng dẫn" data-en="Instruction">Hướng dẫn</a>
+  </nav>
+  
+  <!-- Main layout -->
+  <div class="container">
+    
+    <!-- Main content -->
+    <div class="main">
+      
+      <div style="text-align: center; color: #aaa;">
+        <img src="{% static 'img/logo/anh-30-4-dep.jpg' %}" alt="Xe tăng tiến vào Dinh Độc Lập" class="full-screen-img">
+        <p style="font-size: 13px; margin-top: 5px;">Xe tăng 843 tiến vào Dinh Độc Lập – biểu tượng chiến thắng 30/04/1975</p>
+      </div>
+    </div>
+  </div>
+  <script>
+    function changeLang(lang) {
+        document.querySelectorAll('.lang').forEach(el => {
+          const text = el.getAttribute(`data-${lang}`);
+          if (text) el.textContent = text;
+        });
+        document.querySelectorAll('.lang-input').forEach(el => {
+            const placeholder = el.getAttribute(`data-${lang}`);
+            if (placeholder) el.setAttribute('placeholder', placeholder);
+          });
+        }
+
+  </script>
+</body>
+</html>
+
 {% endblock %}

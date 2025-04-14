@@ -1,10 +1,234 @@
 {% extends "layout.html" %}
+{% load static %}
 
 {% block title %}
     Giới thiệu
 {% endblock %}
 
 {% block content %}
-    <h1>Trang giới thiệu</h1>
-    <p>Muốn quay trở lại <a href="/gioi-thieu">trang chủ</a></p>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Raleway&display=swap" rel="stylesheet">
+
+<style>
+    .main {
+        padding: 50px 0;
+    }
+
+    .intro-section {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        padding: 40px 8%;
+        background: #fefefe;
+    }
+
+    .intro-text {
+        flex: 1;
+        min-width: 300px;
+        padding-right: 40px;
+    }
+
+    .intro-text h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 54px;
+        margin-bottom: 0;
+        color: #222;
+    }
+
+    .intro-text .sub-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 50px;
+        font-style: italic;
+        color: #007bff;
+        margin-top: 0;
+    }
+
+    .intro-text p {
+        font-family: 'Raleway', sans-serif;
+        font-size: 18px;
+        line-height: 1.8;
+        color: #555;
+        margin-top: 20px;
+    }
+
+    .intro-button {
+        display: inline-block;
+        background: #e60039;
+        color: #fff;
+        padding: 14px 30px;
+        border-radius: 50px;
+        margin-top: 35px;
+        text-decoration: none;
+        font-weight: bold;
+        font-family: 'Raleway', sans-serif;
+        box-shadow: 0 4px 12px rgba(230, 0, 57, 0.3);
+        transition: 0.3s ease;
+    }
+
+    .intro-button:hover {
+        background: #c2002f;
+    }
+
+    .intro-image {
+        flex: 1;
+        min-width: 300px;
+        text-align: center;
+    }
+
+    .intro-image img {
+        max-width: 100%;
+        border-radius: 20px;
+        box-shadow: 0 6px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .team-section {
+        text-align: center;
+        padding: 80px 20px;
+        background: #fff;
+    }
+
+    .team-section h2 {
+        font-size: 36px;
+        font-weight: 700;
+        margin-bottom: 50px;
+        font-family: 'Playfair Display', serif;
+    }
+
+    .team-grid {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 40px;
+    }
+
+    .team-member {
+        width: 250px;
+        text-align: center;
+    }
+
+    .team-member img {
+        width: 100%;
+        height: auto;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .team-member h3 {
+        margin-top: 20px;
+        font-size: 20px;
+        font-weight: 700;
+        font-family: 'Raleway', sans-serif;
+    }
+
+    .team-member p {
+        margin-top: 5px;
+        color: #777;
+        font-size: 16px;
+    }
+
+    @media (max-width: 768px) {
+        .intro-section {
+            flex-direction: column-reverse;
+            padding: 40px 20px;
+        }
+
+        .intro-text {
+            padding-right: 0;
+        }
+
+        .intro-text h1,
+        .intro-text .sub-title {
+            text-align: center;
+        }
+
+        .intro-button {
+            display: block;
+            margin: 30px auto 0;
+        }
+
+        .team-grid {
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+</style>
+
+<div class="main">
+    <div class="intro-section">
+        <div class="intro-text">
+            <h1>Welcome to</h1>
+            <h2 class="sub-title">Bản đồ Miền Nam</h2>
+            <p>Dự án này được nhóm 8 thực hiện với mục tiêu xây dựng một bản đồ số trực quan và sinh động thể hiện chi tiết các tỉnh thành khu vực miền Nam Việt Nam.</p>
+            <p>Bản đồ hỗ trợ tra cứu thông tin địa lý, ranh giới, và các yếu tố hành chính cho người học và nhà nghiên cứu. Dự án do ba thành viên cùng phối hợp thực hiện với mong muốn tạo nên một công cụ học tập hữu ích và hiện đại.</p>
+            <a href="#" class="intro-button">Tìm hiểu thêm</a>
+        </div>
+        <div class="intro-image">
+            <img src="{% static 'img/logo/mapVN.jpg' %}" alt="Bản đồ miền Nam Việt Nam">
+        </div>
+    </div>
+<!-- Font đẹp -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Raleway:wght@500;700&display=swap" rel="stylesheet">
+
+<style>
+    /* Banner full màn hình */
+    .full-banner img {
+        width: 100%;
+        height: 100vh;
+        object-fit: cover;
+        display: block;
+    }
+
+    /* Section nhóm */
+    .team-section {
+        padding: 60px 8%;
+        background-color: #fff;
+        text-align: center;
+    }
+
+    .team-section h2 {
+        font-size: 40px;
+        margin-bottom: 40px;
+        font-family: 'Playfair Display', serif;
+        color: #0a688d;
+    }
+
+    .member-names {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+    }
+
+    .member-name {
+        font-size: 24px;
+        font-family: 'Raleway', sans-serif;
+        color: #333;
+        font-weight: 600;
+        letter-spacing: 1px;
+        border-bottom: 2px solid #007bff;
+        padding-bottom: 5px;
+        width: fit-content;
+        transition: all 0.3s ease;
+    }
+
+    .member-name:hover {
+        color: #007bff;
+        transform: scale(1.05);
+    }
+</style>
+
+<!-- Nội dung -->
+<div class="full-banner">
+    <img src="{% static 'img/logo/abc.jpg' %}" alt="Banner nhóm 8">
+</div>
+
+<div class="team-section">
+    <h2>Nhóm 8</h2>
+    <div class="member-names">
+        <p class="member-name">Nguyễn Văn Phú</p>
+        <p class="member-name">Bùi Đắc Quí</p>
+        <p class="member-name">Nguyễn Thanh Đăng</p>
+    </div>
+</div>
+
 {% endblock %}
