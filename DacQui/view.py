@@ -13,4 +13,6 @@ def aboutpage(request):
 def map_view(request):
     return render(request, 'index.html')
 def routing(request):
-    return render(request, 'routing.html')
+    dest = request.GET.get('dest')
+    # Xử lý logic định tuyến, ví dụ: lấy tọa độ, hiển thị bản đồ, tạo marker,...
+    return render(request, 'routing.html', {'dest': dest})

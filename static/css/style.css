@@ -11783,5 +11783,36 @@ body {
     background-color: #bbb;
     border-radius: 6px;
   }  
+    .leaflet-control-back-btn {
+        background-color: #007bff;
+        color: white;
+        font-size: 18px;
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        text-align: center;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s ease;
+    }
 
+    .leaflet-control-back-btn:hover {
+        background-color: #0056b3;
+    }
+
+    .leaflet-control-back-btn i {
+        font-size: 20px;
+    }
+
+    .leaflet-bottom {
+        position: absolute;
+        bottom: 20px;
+        left: 10px;
+    }
+    
+
+    
   

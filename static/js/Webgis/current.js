@@ -56,7 +56,7 @@ function initLocationLayer() {
       if (!showLocation) {
         map.getView().animate({
           center: coords,
-          zoom: map.getView().getZoom() < 14 ? 14 : map.getView().getZoom(),
+          zoom: map.getView().getZoom() < 5 ? 5 : map.getView().getZoom(),
           duration: 1000,
         });
         showLocation = true;
@@ -86,4 +86,10 @@ $("#toggleLocation").on("change", function () {
   } else {
     removeLocationLayer();
   }
+});
+
+window.addEventListener("DOMContentLoaded", function () {
+  const toggle = document.getElementById("toggleLocation");
+  toggle.checked = true;
+  initLocationLayer();
 });

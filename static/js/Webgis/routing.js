@@ -1,3 +1,8 @@
+
+function getQueryParam(param) {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(param);
+}
 var baseLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?', {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> | GIS-Simplified'
 });
@@ -13,6 +18,8 @@ var currentPosition = null;
 var control = null;
 
 const provinces = {
+  "Núi Bà Đen": [11.3814, 106.1711],
+  "Chùa tòa thánh": [11.3000, 106.1167],
   "An Giang": [10.521, 105.125],
   "Bà Rịa - Vũng Tàu": [10.541, 107.242],
   "Bạc Liêu": [9.294, 105.722],
@@ -85,12 +92,19 @@ if (navigator.geolocation) {
     currentPosition = L.latLng(position.coords.latitude, position.coords.longitude);
     L.marker(currentPosition).addTo(map).bindPopup("Vị trí của bạn").openPopup();
     map.setView(currentPosition, 10);
+    // Sau khi có vị trí, kiểm tra tham số dest và gọi triggerRouting nếu có
+    const dest = getQueryParam('dest');
+    if (dest) {
+      triggerRouting(dest);
+    }
   }, function(error) {
     alert("Không thể lấy vị trí hiện tại: " + error.message);
   });
 } else {
   alert("Trình duyệt không hỗ trợ định vị.");
 }
+
+
 
 // Gợi ý khi nhập
 function showSuggestions() {
@@ -123,35 +137,35 @@ function handleSearch(event) {
     document.getElementById("suggestions").innerHTML = "";
   }
 }
-
 // Hàm tìm đường
 function triggerRouting(name) {
   const coords = provinces[name];
   if (!coords) {
-    alert("Không tìm thấy tỉnh trong danh sách!");
-    return;
+      alert("Không tìm thấy địa danh: " + name);
+      return;
   }
-
   if (!currentPosition) {
-    alert("Chưa có vị trí hiện tại!");
-    return;
+      alert("Chưa có vị trí hiện tại!");
+      return;
   }
-
   const destination = L.latLng(...coords);
-  if (control) map.removeControl(control);
-
+  if (control) {
+      map.removeControl(control);
+  }
   control = L.Routing.control({
-    waypoints: [currentPosition, destination],
-    showAlternatives: true,
-    position: 'bottomleft',// ⬅️ di chuyển bảng xuống góc dưới bên trái
-    altLineOptions: {
-      styles: [
-        { color: 'black', opacity: 0.15, weight: 9 },
-        { color: 'white', opacity: 0.8, weight: 6 },
-        { color: 'blue', opacity: 0.5, weight: 2 }
-      ]
-    }
+      waypoints: [currentPosition, destination],
+      showAlternatives: true,
+      position: 'bottomleft',
+      altLineOptions: {
+          styles: [
+              { color: 'black', opacity: 0.15, weight: 9 },
+              { color: 'white', opacity: 0.8, weight: 6 },
+              { color: 'blue', opacity: 0.5, weight: 2 }
+          ]
+      }
   }).addTo(map);
+  map.setView(destination, 10);
+  L.marker(destination).addTo(map).bindPopup(`<b>${name}</b>`).openPopup();
 }
 
 
@@ -197,3 +211,9 @@ function showSuggestions() {
     }
   });
 }
+
+
+// Sự kiện cho nút quay lại
+document.getElementById('backToPreviousBtn').addEventListener('click', function() {
+  window.history.back(); // Quay lại trang trước
+});    // Quay lại vị trí mặc định

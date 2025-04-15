@@ -126,29 +126,68 @@ map.on("singleclick", async function (evt) {
                     vectorLayer.setSource(vectorSource);
 
                     // Tạo HTML bảng thông tin
-                    let html = `<table class="table table-bordered table-hover">
+                    let htmlInfo = `<h5>Thông tin hành chính</h5>
+                    <table class="table table-bordered table-hover">
                         <thead class="thead-light">
                             <tr>
                                 <th scope="col">Tên tỉnh</th>
                                 <th scope="col">Dân số trung bình</th>
                                 <th scope="col">Tổng diện tích</th>
                                 <th scope="col">Tuổi thọ trung bình</th>
+                                <th scope="col">Đường đi</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>`;
+                    
+                    let htmlImage = `<h5>Những địa danh nổi tiếng</h5>
+                    <table class="table table-bordered table-hover">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Tên địa danh</th>
+                                <th scope="col">Hình ảnh</th>
+                                <th scope="col">Đường đi</th>
                             </tr>
                         </thead>
                         <tbody>`;
 
-                    listInfor.forEach(infor => {
-                        html += `<tr>
-                            <td>${infor.admin1na_1 || ""}</td>
-                            <td>${infor.admin1altn || ""}</td>
-                            <td>${infor.admin1refn || ""} Km</td>
-                            <td>${infor.admin1al_1 || ""}</td>
-                        </tr>`;
-                    });
+                  listInfor.forEach(infor => {
+                    htmlInfo += `<tr>
+                        <td>${infor.admin1na_1 || ""}</td>
+                        <td>${infor.admin1altn || ""}</td>
+                        <td>${infor.admin1refn || ""} Km</td>
+                        <td>${infor.admin1al_1 || ""}</td>
+                        <td><a href="/routing/?dest=${infor.admin1na_1 || ""}">Bắt đầu</a></td>
 
-                    html += `</tbody></table>`;
+                    </tr>`;
 
-                    showInfoPanel(html); // Hiển thị panel bên phải
+                    const diaDanhArr = infor.admin1al_2 ? infor.admin1al_2.split(";") : [];
+                    const hinhAnhArr = infor.admin1al_3 ? infor.admin1al_3.split(";") : [];
+                
+                    let rowHtml = "";
+                    for (let i = 0; i < diaDanhArr.length; i++) {
+                        const ten = diaDanhArr[i]?.trim();
+                        const img = hinhAnhArr[i]?.trim();
+                
+                        rowHtml += `<tr>
+                                        <td>${ten || "Không có địa danh"}</td>
+                                        <td>${img 
+                                            ? `<img src="${img}" width="120" height="80" class="img-thumbnail rounded" style="object-fit: cover;">` 
+                                            : "Không có ảnh"}</td>
+                                            <td><a href="/routing/?dest=${encodeURIComponent(ten || "")}">Bắt đầu</a></td>
+
+                                    </tr>`;
+                                    
+                    }
+                
+                    htmlImage += rowHtml;
+                });
+
+                    htmlInfo += `</tbody></table>`;
+                    htmlImage += `</tbody></table>`;
+                    let fullHtml = htmlInfo + htmlImage;
+
+                    showInfoPanel(fullHtml); // Hiển thị panel bên phải
                 } else {
                     closeInfoPanel(); // Ẩn nếu không có thông tin
                 }

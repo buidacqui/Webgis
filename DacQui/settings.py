@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.gis',
     'maps',
 ]
 
@@ -128,9 +127,3 @@ STATICFILES_DIRS=[
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-GDAL_LIBRARY_PATH = os.path.join(
-    os.environ.get('CONDA_PREFIX', ''),
-    'Library',
-    'bin',
-    'gdal.dll'  # ❗ Đổi đúng tên version bạn có (ví dụ gdal306.dll)
-)
