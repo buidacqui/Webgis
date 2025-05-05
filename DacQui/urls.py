@@ -24,7 +24,6 @@ urlpatterns = [
     path('gioi-thieu/', view.aboutpage),
     # Khi người dùng truy cập /gioi-thieu/, Django gọi hàm aboutpage trong view.py.
     # Khi truy cập /posts/, Django sẽ tìm tiếp file urls.py trong ứng dụng posts.
-    path('maps/', include('maps.urls')),
     path('map/', view.map_view),
     path('routing/', view.routing)
 
