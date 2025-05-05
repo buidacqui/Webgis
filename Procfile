@@ -1,0 +1,1 @@
+web: gunicorn DacQui.wsgi --log-file -
